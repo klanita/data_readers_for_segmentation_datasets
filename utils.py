@@ -51,7 +51,7 @@ def load_nii(img_path):
     '''
 
     nimg = nib.load(img_path)
-    return nimg.get_data(), nimg.affine, nimg.header
+    return nimg.get_fdata(), nimg.affine, nimg.header
 
 # ===================================================
 # ===================================================

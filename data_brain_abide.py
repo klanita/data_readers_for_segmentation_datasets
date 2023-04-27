@@ -189,7 +189,7 @@ def prepare_data(input_folder,
         label, _, _ = utils.load_nii(label_path)        
         label = np.swapaxes(label, 1, 2) # swap axes 1 and 2 -> this makes the coronal slices be in the 0-1 plane
         label = utils.group_segmentation_classes(label) # group the segmentation classes as required
-        
+
         # ============
         # create a segmentation mask and use it to get rid of the skull in the image
         # ============
@@ -200,10 +200,10 @@ def prepare_data(input_folder,
         # ==================
         # crop out some portion of the image, which are all zeros (rough registration via visual inspection)
         # ==================
-        if site_name is 'caltech':
+        if site_name == 'caltech':
             image = image[:, 80:, :]
             label = label[:, 80:, :]
-        elif site_name is 'stanford':
+        elif site_name == 'stanford':
             image, label = center_image_and_label(image, label)
                 
         # ==================
@@ -235,7 +235,6 @@ def prepare_data(input_folder,
                         image_hdr.get_zooms()[2] / target_resolution[1]] # since axes 1 and 2 have been swapped. this is important when dealing with pixel dimensions
 
         for zz in range(image.shape[2]):
-
             # ============
             # rescale the images and labels so that their orientation matches that of the nci dataset
             # ============            
@@ -243,14 +242,14 @@ def prepare_data(input_folder,
                                                   scale_vector,
                                                   order=1,
                                                   preserve_range=True,
-                                                  multichannel=False,
+                                                  channel_axis=None,
                                                   mode = 'constant')
  
             label2d_rescaled = rescale(np.squeeze(label[:, :, zz]),
                                                   scale_vector,
                                                   order=0,
                                                   preserve_range=True,
-                                                  multichannel=False,
+                                                  channel_axis=None,
                                                   mode='constant')
             
             # ============            
@@ -386,10 +385,10 @@ def load_without_size_preprocessing(input_folder,
     # ==================
     # crop out some portion of the image, which are all zeros (rough registration via visual inspection)
     # ==================
-    if site_name is 'caltech':
+    if site_name == 'caltech':
         image = image[:, 80:, :]
         label = label[:, 80:, :]
-    elif site_name is 'stanford':
+    elif site_name == 'stanford':
         image, label = center_image_and_label(image, label)
     
     # ==================

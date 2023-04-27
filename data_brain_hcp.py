@@ -207,14 +207,14 @@ def prepare_data(input_folder,
                                                   scale_vector,
                                                   order=1,
                                                   preserve_range=True,
-                                                  multichannel=False,
+                                                  channel_axis=None,
                                                   mode = 'constant')
  
             label2d_rescaled = rescale(np.squeeze(label[:, :, zz]),
                                                   scale_vector,
                                                   order=0,
                                                   preserve_range=True,
-                                                  multichannel=False,
+                                                  channel_axis=None,
                                                   mode='constant')
             
             # ============            

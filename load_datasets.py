@@ -4,8 +4,7 @@
 import datapaths
 import data_brain_hcp
 import data_brain_abide
-import data_cardiac_acdc
-import data_cardiac_rvsc
+
 import data_prostate_nci
 import data_prostate_pirad_erc
 
@@ -20,36 +19,37 @@ def load_dataset(anatomy,
     # =====================================
     # brain datasets
     # =====================================
-    if anatomy is 'brain':
-
+    if anatomy == 'brain':
+        
         # =====================================
         # HCP
         # =====================================
-        if (dataset is 'HCP_T1') or (dataset is 'HCP_T2'):
+        if (dataset == 'HCP_T1') or (dataset == 'HCP_T2'):
+            print(f'Loading {dataset}')
         
             # =====================================
             # subject ids for the train, test and validation subsets.
             # change indices of train-test-validation split, if required.
             # =====================================
-            if train_test_validation is 'train':
+            if train_test_validation == 'train':
                 idx_start = 0
                 idx_end = 20
             
-            elif train_test_validation is 'validation':
+            elif train_test_validation == 'validation':
                 idx_start = 20
                 idx_end = 25
             
-            elif train_test_validation is 'test':
+            elif train_test_validation == 'test':
                 idx_start = 50
                 idx_end = 70
             
             # =====================================
             # for the HCP dataset, both T1 and T2 images are available for each subject
             # =====================================
-            if dataset is 'HCP_T1':
+            if dataset == 'HCP_T1':
                 protocol = 'T1'
                 
-            elif dataset is 'HCP_T2':
+            elif dataset == 'HCP_T2':
                 protocol = 'T2'
             
             # =====================================
@@ -79,24 +79,26 @@ def load_dataset(anatomy,
                                                                     depth = image_depth,
                                                                     target_resolution = target_resolution)
             
+            print(data_brain)
+            
         # =====================================
         # ABIDE
         # =====================================
-        elif (dataset is 'ABIDE_caltech') or (dataset is 'ABIDE_stanford'):
+        elif (dataset == 'ABIDE_caltech') or (dataset == 'ABIDE_stanford'):
         
             # =====================================
             # subject ids for the train, test and validation subsets
             # change indices of train-test-validation split, if required.
             # =====================================
-            if train_test_validation is 'train':
+            if train_test_validation == 'train':
                 idx_start = 0
                 idx_end = 10
             
-            elif train_test_validation is 'validation':
+            elif train_test_validation == 'validation':
                 idx_start = 10
                 idx_end = 15
             
-            elif train_test_validation is 'test':
+            elif train_test_validation == 'test':
                 idx_start = 16
                 idx_end = 36
                         
@@ -116,11 +118,11 @@ def load_dataset(anatomy,
             # All image volumes are cropped from the edges or padded with zeros, in order to ensure that they have the same number of coronal slices,
             # keeping the resolution in this direction the same as in the original images.
             # =====================================
-            if dataset is 'ABIDE_caltech':
+            if dataset == 'ABIDE_caltech':
                 site_name = 'caltech'
                 image_depth = 256
                 
-            elif dataset is 'ABIDE_stanford':
+            elif dataset == 'ABIDE_stanford':
                 site_name = 'stanford'
                 image_depth = 132
               
@@ -148,7 +150,10 @@ def load_dataset(anatomy,
     # =====================================
     # 
     # =====================================
-    elif anatomy is 'cardiac':
+    elif anatomy == 'cardiac':
+        
+        import data_cardiac_acdc
+        import data_cardiac_rvsc
         
         data_mode = '2D'
         image_size = (256, 256)
@@ -158,7 +163,7 @@ def load_dataset(anatomy,
         # =====================================
         # 
         # =====================================
-        if dataset is 'ACDC':
+        if dataset == 'ACDC':
                         
             data_cardiac = data_cardiac_acdc.load_and_maybe_process_data(input_folder = datapaths.orig_dir_acdc,
                                                                          preprocessing_folder = datapaths.preproc_dir_acdc,
@@ -167,7 +172,7 @@ def load_dataset(anatomy,
                                                                          target_resolution = target_resolution,
                                                                          cv_fold_num = cv_fold_number)
             
-        elif dataset is 'RVSC':
+        elif dataset == 'RVSC':
 
             data_cardiac = data_cardiac_rvsc.load_and_maybe_process_data(input_folder = datapaths.orig_dir_rvsc,
                                                                          preprocessing_folder = datapaths.preproc_dir_rvsc,
@@ -186,7 +191,7 @@ def load_dataset(anatomy,
     # =====================================
     # 
     # =====================================
-    elif anatomy is 'prostate':
+    elif anatomy == 'prostate':
         
         image_size = (256, 256)
         target_resolution = (0.625, 0.625)
@@ -194,7 +199,7 @@ def load_dataset(anatomy,
         # =====================================
         # 
         # =====================================
-        if dataset is 'NCI':
+        if dataset == 'NCI':
             
             cv_fold_number = 1
                     
@@ -213,22 +218,22 @@ def load_dataset(anatomy,
         # =====================================
         # 
         # =====================================            
-        elif dataset is 'PIRAD_ERC':
+        elif dataset == 'PIRAD_ERC':
             
             pirad_erc_labeller = 'ek'
             
             # =====================================
             # subject ids for the train, test and validation subsets
             # =====================================
-            if train_test_validation is 'train':
+            if train_test_validation == 'train':
                 idx_start = 40
                 idx_end = 68
             
-            elif train_test_validation is 'validation':
+            elif train_test_validation == 'validation':
                 idx_start = 20
                 idx_end = 40
             
-            elif train_test_validation is 'test':
+            elif train_test_validation == 'test':
                 idx_start = 0
                 idx_end = 20
             
