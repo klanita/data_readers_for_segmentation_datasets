@@ -46,7 +46,7 @@ def copy_files_to_local_directory_and_correct_bias_field(src_folder,
         copyfile(src_folder_this_patient + suffix, dst_folder_this_patient + suffix) 
 
         # correct bias field for the image
-        subprocess.call(["/usr/bmicnas01/data-biwi-01/bmicdatasets/Sharing/N4_th", dst_folder_this_patient + '/MPRAGE.nii', dst_folder_this_patient + '/MPRAGE_n4.nii'])
+        subprocess.call(["/usr/bmicnas02/data-biwi-01/bmicdatasets/Sharing/N4_th", dst_folder_this_patient + '/MPRAGE.nii', dst_folder_this_patient + '/MPRAGE_n4.nii'])
                         
 # ===============================================================
 # Helper function to get paths to the image and label file

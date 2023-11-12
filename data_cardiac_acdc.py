@@ -290,8 +290,8 @@ def prepare_data(input_folder,
                 # ==============================
                 # rescale image and label
                 # ==============================
-                image_scaled = transform.rescale(image, scale_vector, order=1, preserve_range=True, multichannel=False, mode='constant')
-                label_scaled = transform.rescale(label, scale_vector, order=0, preserve_range=True, multichannel=False, mode='constant')
+                image_scaled = transform.rescale(image, scale_vector, order=1, preserve_range=True, channel_axis=None, mode='constant')
+                label_scaled = transform.rescale(label, scale_vector, order=0, preserve_range=True, channel_axis=None, mode='constant')
                 
                 # ==============================
                 # ==============================
@@ -364,8 +364,8 @@ def prepare_data(input_folder,
                     image_slice = np.squeeze(image[:, :, zz])
                     label_slice = np.squeeze(label[:, :, zz])
                     
-                    image_slice_rescaled = transform.rescale(image_slice, scale_vector, order = 1, preserve_range = True, multichannel = False, mode = 'constant')
-                    label_slice_rescaled = transform.rescale(label_slice, scale_vector, order = 0, preserve_range = True, multichannel = False, mode = 'constant')
+                    image_slice_rescaled = transform.rescale(image_slice, scale_vector, order = 1, preserve_range = True, channel_axis=None, mode = 'constant')
+                    label_slice_rescaled = transform.rescale(label_slice, scale_vector, order = 0, preserve_range = True, channel_axis=None, mode = 'constant')
 
                     image_slice_cropped = utils.crop_or_pad_slice_to_size(image_slice_rescaled, nx, ny)
                     label_slice_cropped = utils.crop_or_pad_slice_to_size(label_slice_rescaled, nx, ny)

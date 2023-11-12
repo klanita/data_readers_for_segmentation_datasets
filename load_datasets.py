@@ -187,7 +187,7 @@ def load_dataset(anatomy,
         # =====================================  
         images = data_cardiac['images_' + train_test_validation]
         labels = data_cardiac['labels_' + train_test_validation]
-        
+
     # =====================================
     # 
     # =====================================
@@ -212,8 +212,9 @@ def load_dataset(anatomy,
             # =====================================  
             # 
             # =====================================  
+
             images = data_pros['images_' + train_test_validation]
-            labels = data_pros['labels_' + train_test_validation]
+            labels = data_pros['masks_' + train_test_validation]
 
         # =====================================
         # 

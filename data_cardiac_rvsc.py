@@ -122,7 +122,7 @@ def read_image(image_folder_path,
         for e in ['ED', 'ES']:
             input_img = nifti_img_path + 'img_' + e + '.nii.gz'
             output_img = nifti_img_path + 'img_' + e + '_n4.nii.gz'
-            subprocess.call(["/usr/bmicnas01/data-biwi-01/bmicdatasets/Sharing/N4_th", input_img, output_img])
+            subprocess.call(["/usr/bmicnas02/data-biwi-01/bmicdatasets/Sharing/N4_th", input_img, output_img])
     
     # ================================    
     # read bias corrected image
@@ -394,14 +394,14 @@ def prepare_data(input_folder,
                                                       scale_vector,
                                                       order = 1,
                                                       preserve_range = True,
-                                                      multichannel = False,
+                                                      channel_axis = None,
                                                       mode = 'constant')
                 
                 label_rescaled_ED = transform.rescale(np.squeeze(lab_ED[:, :, zz]),
                                                       scale_vector,
                                                       order = 0,
                                                       preserve_range = True,
-                                                      multichannel = False,
+                                                      channel_axis = None,
                                                       mode = 'constant')
 
                 slice_cropped_ED = utils.crop_or_pad_slice_to_size(slice_rescaled_ED, nx, ny)
@@ -438,14 +438,14 @@ def prepare_data(input_folder,
                                                       scale_vector,
                                                       order = 1,
                                                       preserve_range = True,
-                                                      multichannel = False,
+                                                      channel_axis=None,
                                                       mode = 'constant')
                 
                 label_rescaled_ES = transform.rescale(np.squeeze(lab_ES[:, :, zz]),
                                                       scale_vector,
                                                       order = 0,
                                                       preserve_range = True,
-                                                      multichannel = False,
+                                                      channel_axis=None,
                                                       mode = 'constant')
 
                 slice_cropped_ES = utils.crop_or_pad_slice_to_size(slice_rescaled_ES, nx, ny)

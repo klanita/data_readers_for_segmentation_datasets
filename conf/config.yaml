@@ -1,0 +1,10 @@
+hydra:
+  run:
+    dir: /usr/bmicnas02/data-biwi-01/klanna_data/hydra/seg_datasets/${now:%Y-%m-%d}/${now:%H-%M-%S}
+
+defaults:
+  - dataset: abide_caltech
+
+path : /itet-stor/klanna/bmicdatasets_bmicnas02/Sharing/klanna/processed_data/
+tgtpath: /itet-stor/klanna/bmicdatasets_bmicnas02/Sharing/klanna/da_data/
+split: val,train,test

@@ -7,7 +7,7 @@ import os
 # ==================================================================
 # PATHS for original data
 # ==================================================================
-bmic_data_root = '/usr/bmicnas01/data-biwi-01/bmicdatasets-originals/Originals/'
+bmic_data_root = '/usr/bmicnas02/data-biwi-01/bmicdatasets-originals/Originals/'
 orig_dir_hcp = os.path.join(bmic_data_root,'HCP/3T_Structurals_Preprocessed/')
 orig_dir_abide = os.path.join(bmic_data_root,'ABIDE/') 
 orig_dir_acdc = os.path.join(bmic_data_root,'Challenge_Datasets/ACDC_challenge_new/')
@@ -18,7 +18,7 @@ orig_dir_pirad_erc = os.path.join(bmic_data_root,'USZ/Prostate/')
 # ==================================================================
 # PATHS for preprocessed data
 # ==================================================================
-preproc_dir_root = '/itet-stor/klanna/bmicdatasets_bmicnas01/Sharing/klanna/processed_data/'
+preproc_dir_root = '/itet-stor/klanna/bmicdatasets_bmicnas02/Sharing/klanna/processed_data/'
 preproc_dir_hcp = os.path.join(preproc_dir_root, 'hcp/')
 preproc_dir_abide = os.path.join(preproc_dir_root, 'abide/')
 preproc_dir_acdc = os.path.join(preproc_dir_root, 'acdc/')

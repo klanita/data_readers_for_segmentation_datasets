@@ -209,7 +209,7 @@ def prepare_data(input_folder,
             # ================================
             input_img = nifti_img_path + 'img.nii.gz'
             output_img = nifti_img_path + 'img_n4.nii.gz'
-            subprocess.call(["/usr/bmicnas01/data-biwi-01/bmicdatasets/Sharing/N4_th", input_img, output_img])
+            subprocess.call(["/usr/bmicnas02/data-biwi-01/bmicdatasets/Sharing/N4_th", input_img, output_img])
     
             # ================================    
             # read bias corrected image
@@ -255,7 +255,7 @@ def prepare_data(input_folder,
                                                    scale_vector,
                                                    order=1,
                                                    preserve_range=True,
-                                                   multichannel=False,
+                                                   channel_axis=None,
                                                    mode = 'constant')
 
                 slice_mask = np.squeeze(mask[:, :, zz])
@@ -263,7 +263,7 @@ def prepare_data(input_folder,
                                                   scale_vector,
                                                   order=0,
                                                   preserve_range=True,
-                                                  multichannel=False,
+                                                  channel_axis=None,
                                                   mode='constant')
 
                 slice_cropped = utils.crop_or_pad_slice_to_size(slice_rescaled, nx, ny)
