@@ -65,6 +65,8 @@ def convert_3d(masks):
 def convert_args(input_str):
     if input_str == 'None':
         return None
+    elif isinstance(input_str, int):
+        return bool(input_str)
     else:
         if ',' in input_str:
             return input_str.split(',')
@@ -127,8 +129,12 @@ def start_training(cfg: DictConfig) -> None:
             images_all = h5_fh['images_'+ split_name][:]
             masks_all = h5_fh['labels_'+ split_name][:]
 
-        tgt_folder_imgs = f'{tgtpath}/{dataset}/images/{split}/'
-        tgt_folder_labels = f'{tgtpath}/{dataset}/labels/{split}/'
+        if args['filter']:
+            tgt_folder_imgs = f'{tgtpath}/{dataset}/images/{split}-filtered/'
+            tgt_folder_labels = f'{tgtpath}/{dataset}/labels/{split}-filtered/'
+        else:
+            tgt_folder_imgs = f'{tgtpath}/{dataset}/images/{split}/'
+            tgt_folder_labels = f'{tgtpath}/{dataset}/labels/{split}/'
 
         os.makedirs(tgt_folder_imgs, exist_ok=True) 
         os.makedirs(tgt_folder_labels, exist_ok=True) 
@@ -136,18 +142,31 @@ def start_training(cfg: DictConfig) -> None:
         n_images = len(images_all)
         print(dataset, split, n_images)
         pbar = tqdm(range(n_images))
+        filter_count = 0
         for i_img in pbar:
             pbar.set_description(f"{tgt_folder_labels}/{i_img:04d}.png")
             img = images_all[i_img]
-            masks = masks_all[i_img]
-            img_pil = Image.fromarray(np.uint8(img*255))#.convert('RGB')
+            masks = masks_all[i_img]            
+            if args['filter']:
+                if np.sum(masks) == 0:
+                    save = False
+                    filter_count += 1
+                else:
+                    save = True
+            else:
+                save = True
 
-            masks_pil_3d = convert_3d(masks)            
-            masks_pil = Image.fromarray(np.uint8(masks))
-            
-            img_pil.save(f"{tgt_folder_imgs}/{i_img:04d}.png","PNG")
-            masks_pil_3d.save(f"{tgt_folder_labels}/{i_img:04d}.png","PNG")
-            masks_pil.save(f"{tgt_folder_labels}/{i_img:04d}_labelTrainIds.png","PNG")
+            if save:
+                img_pil = Image.fromarray(np.uint8(img*255))#.convert('RGB')
+
+                masks_pil_3d = convert_3d(masks)            
+                masks_pil = Image.fromarray(np.uint8(masks))
+                
+                img_pil.save(f"{tgt_folder_imgs}/{i_img:04d}.png","PNG")
+                masks_pil_3d.save(f"{tgt_folder_labels}/{i_img:04d}.png","PNG")
+                masks_pil.save(f"{tgt_folder_labels}/{i_img:04d}_labelTrainIds.png","PNG")
+
+        print(f'{filter_count} images out of {n_images} are empty.')
         print('done\n')
 
 if __name__ == '__main__':
