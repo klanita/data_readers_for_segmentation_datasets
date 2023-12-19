@@ -5,7 +5,6 @@ hydra:
 defaults:
   - dataset: abide_caltech
 
-path : /itet-stor/klanna/bmicdatasets_bmicnas02/Sharing/klanna/processed_data/
 tgtpath: /itet-stor/klanna/bmicdatasets_bmicnas02/Sharing/klanna/da_data/
-split: test,val
+split: train
 filter: 0

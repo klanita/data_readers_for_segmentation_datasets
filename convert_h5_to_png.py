@@ -17,6 +17,16 @@ DATASET_PATHS = {
         'val': 'hcp/data_T1_2d_size_256_256_depth_256_res_0.7_0.7_from_20_to_25.hdf5',
         'test': 'hcp/data_T1_2d_size_256_256_depth_256_res_0.7_0.7_from_50_to_70.hdf5'
         },
+    'hcp1_full': {
+        'train': 'hcp/data_T1_2d_size_256_256_depth_256_res_0.7_0.7_from_0_to_1040.hdf5',
+        'val': 'hcp/data_T1_2d_size_256_256_depth_256_res_0.7_0.7_from_20_to_25.hdf5',
+        # 'test': 'hcp/data_T1_2d_size_256_256_depth_256_res_0.7_0.7_from_50_to_70.hdf5'
+        },
+    'hcp2_full': {
+        'train': 'hcp/data_T2_2d_size_256_256_depth_256_res_0.7_0.7_from_0_to_1040.hdf5',
+        'val': 'hcp/data_T2_2d_size_256_256_depth_256_res_0.7_0.7_from_20_to_25.hdf5',
+        # 'test': 'hcp/data_T1_2d_size_256_256_depth_256_res_0.7_0.7_from_50_to_70.hdf5'
+        },
     'hcp2': {
         'train': 'hcp/data_T2_2d_size_256_256_depth_256_res_0.7_0.7_from_0_to_20.hdf5',
         'val': 'hcp/data_T2_2d_size_256_256_depth_256_res_0.7_0.7_from_20_to_25.hdf5',
@@ -104,11 +114,11 @@ def start_training(cfg: DictConfig) -> None:
 
     dataset = args['dataset']
     for split in args['split']:        
-        if dataset in ['hcp1', 'hcp2', 'abide_caltech', 'abide_stanford', 'pirad_erc']:
+        if dataset in ['hcp1', 'hcp2', 'abide_caltech', 'abide_stanford', 'pirad_erc', 'hcp1_full', 'hcp2_full']:
             dataset_folder = DATASET_PATHS[dataset][split]
             h5_fh = h5py.File(f'{path}/{dataset_folder}', 'r')
-            images_all = h5_fh['images'][:]
-            masks_all = h5_fh['labels'][:]
+            images_all = h5_fh['images']
+            masks_all = h5_fh['labels']
         elif dataset == 'nci':
             dataset_folder = DATASET_PATHS[dataset]['all']
             h5_fh = h5py.File(f'{path}/{dataset_folder}', 'r')
@@ -116,8 +126,8 @@ def start_training(cfg: DictConfig) -> None:
             if split_name == 'val':
                 split_name = 'validation'
 
-            images_all = h5_fh['images_'+ split_name][:]
-            masks_all = h5_fh['masks_'+ split_name][:]
+            images_all = h5_fh['images_'+ split_name]
+            masks_all = h5_fh['masks_'+ split_name]
 
         else:
             dataset_folder = DATASET_PATHS[dataset]['all']
@@ -126,8 +136,8 @@ def start_training(cfg: DictConfig) -> None:
             if split_name == 'val':
                 split_name = 'validation'
 
-            images_all = h5_fh['images_'+ split_name][:]
-            masks_all = h5_fh['labels_'+ split_name][:]
+            images_all = h5_fh['images_'+ split_name]
+            masks_all = h5_fh['labels_'+ split_name]
 
         if args['filter']:
             tgt_folder_imgs = f'{tgtpath}/{dataset}/images/{split}-filtered/'
