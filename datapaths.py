@@ -18,7 +18,8 @@ orig_dir_pirad_erc = os.path.join(bmic_data_root,'USZ/Prostate/')
 # ==================================================================
 # PATHS for preprocessed data
 # ==================================================================
-preproc_dir_root = '/itet-stor/klanna/bmicdatasets_bmicnas02/Sharing/klanna/processed_data/'
+# preproc_dir_root = '/itet-stor/klanna/bmicdatasets_bmicnas02/Sharing/klanna/processed_data/'
+preproc_dir_root = '/itet-stor/klanna/bmicdatasets_bmicnas02/Sharing/klanna/processed_data_copy/'
 preproc_dir_hcp = os.path.join(preproc_dir_root, 'hcp/')
 preproc_dir_abide = os.path.join(preproc_dir_root, 'abide/')
 preproc_dir_acdc = os.path.join(preproc_dir_root, 'acdc/')

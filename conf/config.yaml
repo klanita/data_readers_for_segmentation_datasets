@@ -6,5 +6,5 @@ defaults:
   - dataset: abide_caltech
 
 tgtpath: /itet-stor/klanna/bmicdatasets_bmicnas02/Sharing/klanna/da_data/
-split: train
+split: train,test,val
 filter: 0

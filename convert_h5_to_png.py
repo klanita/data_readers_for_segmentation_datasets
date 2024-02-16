@@ -56,6 +56,22 @@ DATASET_PATHS = {
     'rvsc': {
         'all': 'rvsc/data_2D_size_256_256_res_1.33_1.33_cv_fold_1.hdf5',
         },
+    'umc': {
+        'train': 'umc/data_umc_2d_size_256_256_depth_48_res_1_1_3_from_0_to_10.hdf5',
+        'val': 'umc/data_umc_2d_size_256_256_depth_48_res_1_1_3_from_10_to_15.hdf5',
+        'test': 'umc/data_umc_2d_size_256_256_depth_48_res_1_1_3_from_15_to_20.hdf5'
+    },
+    'nuhs': {
+        'train': 'nuhs/data_nuhs_2d_size_256_256_depth_48_res_1_1_3_from_0_to_10.hdf5',
+        'val': 'nuhs/data_nuhs_2d_size_256_256_depth_48_res_1_1_3_from_10_to_15.hdf5',
+        'test': 'nuhs/data_nuhs_2d_size_256_256_depth_48_res_1_1_3_from_15_to_20.hdf5'
+    },
+    'vu': {
+        'train': 'vu/data_vu_2d_size_256_256_depth_48_res_1_1_3_from_0_to_10.hdf5',
+        'val': 'vu/data_vu_2d_size_256_256_depth_48_res_1_1_3_from_10_to_15.hdf5',
+        'test': 'vu/data_vu_2d_size_256_256_depth_48_res_1_1_3_from_15_to_20.hdf5'
+    }
+
 }
 
 
@@ -114,7 +130,7 @@ def start_training(cfg: DictConfig) -> None:
 
     dataset = args['dataset']
     for split in args['split']:        
-        if dataset in ['hcp1', 'hcp2', 'abide_caltech', 'abide_stanford', 'pirad_erc', 'hcp1_full', 'hcp2_full']:
+        if dataset in ['hcp1', 'hcp2', 'abide_caltech', 'abide_stanford', 'pirad_erc', 'hcp1_full', 'hcp2_full', 'umc', 'vu', 'nuhs']:
             dataset_folder = DATASET_PATHS[dataset][split]
             h5_fh = h5py.File(f'{path}/{dataset_folder}', 'r')
             images_all = h5_fh['images']

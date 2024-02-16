@@ -45,8 +45,9 @@ import time
 #                                                     first_run = True)  # <-- SET TO TRUE FOR THE FIRST RUN (enables preliminary preprocessing e.g. bias field correction)
 
 
-# ANATOMY = 'prostate'
-# for DATASET in ['NCI', 'PIRAD_ERC']:
+ANATOMY = 'prostate'
+# for DATASET in ['NCI']:
+# # for DATASET in ['NCI', 'PIRAD_ERC']:
 #     for TRAIN_TEST_VALIDATION in ['train', 'validation', 'test']:
 #         ts = time.time()
 #         print(ANATOMY, TRAIN_TEST_VALIDATION, DATASET)
@@ -59,10 +60,12 @@ import time
 
 DATASET_LIST = {'cardiac': ['ACDC', 'RVSC'],
                 'brain': ['HCP_T1', 'HCP_T2', 'ABIDE_caltech', 'ABIDE_stanford'],
-                'prostate': ['NCI', 'PIRAD_ERC']}
+                'prostate': ['NCI', ]}
+                # 'prostate': ['NCI', 'PIRAD_ERC']}
 
-ANATOMY = 'cardiac'
-TRAIN_TEST_VALIDATION_LIST = ['train', 'validation', 'test']
+# ANATOMY = 'cardiac'
+# TRAIN_TEST_VALIDATION_LIST = ['train', 'validation', 'test']
+TRAIN_TEST_VALIDATION_LIST = ['train']
 
 for DATASET in DATASET_LIST[ANATOMY]:
     for TRAIN_TEST_VALIDATION in TRAIN_TEST_VALIDATION_LIST:
@@ -73,4 +76,5 @@ for DATASET in DATASET_LIST[ANATOMY]:
                                                     train_test_validation = TRAIN_TEST_VALIDATION,
                                                     first_run = True)  # <-- SET TO TRUE FOR THE FIRST RUN (enables preliminary preprocessing e.g. bias field correction)
         run_time_min = (time.time() - ts)/60
+        print(len(images), len(labels))
         print(f'{run_time_min:.1f} min')
