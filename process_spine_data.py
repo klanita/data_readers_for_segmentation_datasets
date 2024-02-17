@@ -458,6 +458,7 @@ def get_slices(dataset, folder, split):
     
     meta_file_path = f'{tgt_path}/{tgt_folder_name}/scale_{split}.pickle'
     with open(meta_file_path, 'wb') as handle:
+        meta_info['resolution_proc'] = np.array(meta_info['resolution_proc'][0])
         pickle.dump(meta_info, handle, protocol=pickle.HIGHEST_PROTOCOL)
     # with open(meta_file_path, 'wb') as handle:
     #     pickle.dump(meta_info, handle, protocol=pickle.HIGHEST_PROTOCOL)
